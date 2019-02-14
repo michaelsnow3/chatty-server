@@ -52,11 +52,15 @@ wss.on('connection', (ws) => {
     switch(data.type){
       case 'postMessage': 
         console.log(`User ${data.username} said ${data.content}`);
+        const imageRE = /(.*)\s?(http.*)\.(jpg|png|gif)$/;
+        const image = data.content.match(imageRE);
+        
         response = {
           type: 'incomingMessage',
           content: data.content,
           username: data.username,
           userColour: data.userColour,
+          image,
           id
         }
         break;
