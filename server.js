@@ -56,6 +56,7 @@ wss.on('connection', (ws) => {
           type: 'incomingMessage',
           content: data.content,
           username: data.username,
+          userColour: data.userColour,
           id
         }
         break;
