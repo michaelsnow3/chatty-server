@@ -2,8 +2,7 @@
 
 Web socket server for Chatty-App
 ## Built with
-- express
-- ws
+- express, ws
 
 ## Dependencies
 - express
