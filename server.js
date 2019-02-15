@@ -51,7 +51,6 @@ wss.on('connection', (ws) => {
 
     switch(data.type){
       case 'postMessage': 
-        console.log(`User ${data.username} said ${data.content}`);
         const imageRE = /(.*)\s?(http.*)\.(jpg|png|gif)$/;
         const image = data.content.match(imageRE);
         
@@ -66,7 +65,6 @@ wss.on('connection', (ws) => {
         break;
       
       case 'postNotification':
-        console.log(`${data.oldUsername} changed name to ${data.newUsername}`)
         response = {
           type: 'incomingNotification',
           oldUsername: data.oldUsername,
