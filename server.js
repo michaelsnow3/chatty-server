@@ -44,7 +44,7 @@ wss.on('connection', (ws) => {
   //set up a callback that handles users messages
   ws.on('message', (message) => {
     const data = JSON.parse(message);
-    let reponse = {};
+
 
     //create object that will be sent back to client, include id
     const id = uuidv1();
@@ -54,27 +54,25 @@ wss.on('connection', (ws) => {
         const imageRE = /(.*)\s?(http.*)\.(jpg|png|gif)$/;
         const image = data.content.match(imageRE);
         
-        response = {
+        wss.broadcast(JSON.stringify({
           type: 'incomingMessage',
           content: data.content,
           username: data.username,
           userColour: data.userColour,
           image,
           id
-        }
+        }));
         break;
       
       case 'postNotification':
-        response = {
+      wss.broadcast(JSON.stringify({
           type: 'incomingNotification',
           oldUsername: data.oldUsername,
           newUsername: data.newUsername,
           id
-        }
+        }));
       break;
-    }
-
-    wss.broadcast(JSON.stringify(response));
+    }    
 
   });
 
